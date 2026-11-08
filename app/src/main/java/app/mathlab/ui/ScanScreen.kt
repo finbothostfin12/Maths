@@ -45,6 +45,7 @@ import java.io.File
 import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.jvm.JvmName
 
 /** Cleans OCR output and guesses what kind of problem it is. */
 object Ocr {
@@ -169,6 +170,7 @@ class ScanState {
         return Bitmap.createBitmap(bmp, l, t, r - l, btm - t)
     }
 
+    @JvmName("updateMode")
     fun setMode(m: Int) {
         mode = m
         if (m >= 2 && tri.all { it.isEmpty() }) fillFromText()
