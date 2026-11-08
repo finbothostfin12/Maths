@@ -5,6 +5,7 @@ import androidx.compose.runtime.*
 import app.mathlab.math.AngleMode
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.jvm.JvmName
 
 data class HistoryEntry(val id: Long, val expr: String, val result: String, val time: Long, val kind: String)
 
@@ -24,10 +25,15 @@ class AppState(context: Context) {
 
     val history = mutableStateListOf<HistoryEntry>().also { it.addAll(loadHistory()) }
 
+    @JvmName("updatePalette")
     fun setPalette(v: String) { palette = v; prefs.edit().putString("palette", v).apply() }
+    @JvmName("updateCustomHue")
     fun setCustomHue(v: Float) { customHue = v; prefs.edit().putFloat("hue", v).apply() }
+    @JvmName("updateThemeMode")
     fun setThemeMode(v: Int) { themeMode = v; prefs.edit().putInt("themeMode", v).apply() }
+    @JvmName("updatePureBlack")
     fun setPureBlack(v: Boolean) { pureBlack = v; prefs.edit().putBoolean("pureBlack", v).apply() }
+    @JvmName("updateAngle")
     fun setAngle(v: AngleMode) { angle = v; prefs.edit().putString("angle", v.name).apply() }
 
     private fun loadHistory(): List<HistoryEntry> = try {
